@@ -7,9 +7,21 @@
 [![CI](https://github.com/bartwaardenburg/anwb-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/bartwaardenburg/anwb-mcp/actions/workflows/ci.yml)
 [![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/BartWaardenburg/c4d8758ff995f9d070ba1a7c6e6adccb/raw/anwb-mcp-coverage.json)](https://bartwaardenburg.github.io/anwb-mcp/)
 
+Een [Model Context Protocol](https://modelcontextprotocol.io) (MCP) server voor ANWB verkeersinformatie, routeplanning en locatiezoeken in Nederland. Krijg realtime file-informatie, bereken routes met stapsgewijze routebeschrijvingen en zoek locaties — allemaal via natuurlijke taal in je AI-app.
+
+> **Let op:** Dit is een onofficieel, community-onderhouden project en is niet verbonden aan of goedgekeurd door ANWB. Deze server gebruikt publiek toegankelijke ANWB API-endpoints — geen API-key nodig.
+
 A community-built [Model Context Protocol](https://modelcontextprotocol.io) (MCP) server for ANWB traffic information, route planning, and location search in the Netherlands. Get real-time traffic incidents, calculate routes with turn-by-turn directions, and search for locations — all through natural language via any MCP-compatible AI client.
 
 > **Note:** This is an unofficial, community-maintained project and is not affiliated with or endorsed by ANWB. This server uses publicly accessible ANWB API endpoints — no API key required.
+
+## Snel starten
+
+Je hoeft deze repo niet te clonen.
+
+1. Zorg dat Node.js 20+ is geïnstalleerd (je AI-app draait `npx` op je machine)
+2. Voeg de server toe als MCP server in je AI-app (kopieer onderstaande configuratie)
+3. Stel vragen in gewoon Nederlands (zie [Voorbeelden](#voorbeelden))
 
 ## Quick Start (Non-Developers)
 
@@ -214,6 +226,27 @@ ANWB_TOOLSETS=routes,incidents
 | `incidents` | Traffic incidents and summary |
 
 When not set, all toolsets are enabled. Invalid names are ignored; if all names are invalid, all toolsets are enabled as a fallback.
+
+## Voorbeelden
+
+Eenmaal verbonden kun je in gewoon Nederlands vragen stellen:
+
+- "Zoek locaties in de buurt van Amsterdam"
+- "Wat zijn de coördinaten van Eindhoven Centraal?"
+- "Bereken een route van Amsterdam naar Eindhoven"
+- "Plan een fietsroute van Utrecht Centraal naar De Uithof"
+- "Hoe lang loop je van de Dam naar het Vondelpark?"
+- "Wat is de snelste route van Utrecht naar Den Haag?"
+- "Staan er files op de A2?"
+- "Welke wegwerkzaamheden zijn er nu?"
+- "Geef een verkeerssamenvatting"
+- "Welke flitsers staan er op de A1?"
+- "Plan een route van Ede naar Zwolle zonder tolwegen"
+- "Bereken een caravanroute van Amsterdam naar de Veluwe"
+- "Plan een e-bike route van Utrecht naar Amersfoort"
+- "Welke elektrische auto's van Tesla zijn beschikbaar?"
+- "Plan een EV-route van Amsterdam naar Maastricht met een Tesla Model 3"
+- "Hoe lang duurt het rijden van Rotterdam naar Groningen zonder snelwegen?"
 
 ## Example Usage
 
