@@ -5,6 +5,7 @@
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen.svg)](https://nodejs.org/)
 [![MCP](https://img.shields.io/badge/MCP-compatible-purple.svg)](https://modelcontextprotocol.io)
 [![CI](https://github.com/bartwaardenburg/anwb-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/bartwaardenburg/anwb-mcp/actions/workflows/ci.yml)
+[![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/BartWaardenburg/c4d8758ff995f9d070ba1a7c6e6adccb/raw/anwb-mcp-coverage.json)](https://bartwaardenburg.github.io/anwb-mcp/)
 
 A community-built [Model Context Protocol](https://modelcontextprotocol.io) (MCP) server for ANWB traffic information, route planning, and location search in the Netherlands. Get real-time traffic incidents, calculate routes with turn-by-turn directions, and search for locations — all through natural language via any MCP-compatible AI client.
 
