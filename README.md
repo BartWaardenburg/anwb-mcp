@@ -140,6 +140,17 @@ Host key mapping:
 | Zed | `context_servers` | Same command/args block |
 | Codex CLI (TOML) | `mcp_servers` | Uses TOML, shown below |
 
+### Claude Ecosystem Notes
+
+Claude currently has multiple MCP-related concepts that are easy to mix up:
+
+- **Local MCP servers (Claude Desktop):** defined in `claude_desktop_config.json` and started on your machine ([docs](https://support.claude.com/en/articles/10949351-getting-started-with-local-mcp-servers-on-claude-desktop)).
+- **Cowork:** reuses the MCP servers connected in Claude Desktop ([docs](https://support.claude.com/en/articles/13345190-get-started-with-cowork)).
+- **Connectors:** remote MCP integrations managed in Claude ([docs](https://support.claude.com/en/articles/11176164-use-connectors-to-extend-claude-s-capabilities)).
+- **Cowork plugins:** Claude-specific workflow packaging (instructions + tools/data integrations) ([docs](https://support.claude.com/en/articles/13837440-use-plugins-in-cowork)). Useful in Claude, but not portable as a generic MCP server config for other agent clients.
+
+Verified against vendor docs on **2026-03-05**.
+
 ### Claude Code
 
 ```bash
@@ -162,6 +173,22 @@ gemini mcp add anwb-mcp -- npx -y anwb-mcp
 
 Open Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`) > `MCP: Add Server` > **Command (stdio)**, or use `.vscode/mcp.json` with top-level key `servers` and the canonical command/args block from [Generic MCP Server Config](#generic-mcp-server-config).
 
+### Claude Desktop + Cowork / Cursor / Windsurf / Cline / Zed
+
+Cowork runs inside Claude Desktop and uses the same connected MCP servers and permissions. Configure once in Claude Desktop, then the server is available in Cowork.
+
+Use the canonical config block and place it in the host file below with the matching top-level key.
+
+| Client | Config location | Top-level key |
+|---|---|---|
+| Claude Desktop (macOS) | `~/Library/Application Support/Claude/claude_desktop_config.json` | `mcpServers` |
+| Claude Desktop (Windows) | `%APPDATA%\\Claude\\claude_desktop_config.json` | `mcpServers` |
+| Cursor (project) | `.cursor/mcp.json` | `mcpServers` |
+| Cursor (global) | `~/.cursor/mcp.json` | `mcpServers` |
+| Windsurf | `~/.codeium/windsurf/mcp_config.json` | `mcpServers` |
+| Cline | MCP settings UI | `mcpServers` |
+| Zed (macOS/Linux) | `~/.zed/settings.json` or `~/.config/zed/settings.json` | `context_servers` |
+
 ### Docker
 
 ```bash
@@ -175,6 +202,30 @@ docker run -i --rm ghcr.io/bartwaardenburg/anwb-mcp
 command = "npx"
 args = ["-y", "anwb-mcp"]
 ```
+
+### Other MCP Clients
+
+Use the values from [Generic MCP Server Config](#generic-mcp-server-config).
+
+## Terminology
+
+What is portable across hosts:
+
+- MCP server runtime settings (`command`, `args`, `env`)
+- Transport model (`stdio` command server)
+- Tool names and tool schemas exposed by this server
+
+What is host/vendor-specific (not portable as-is):
+
+- Host config key names (`servers`, `mcpServers`, `context_servers`, `mcp_servers`)
+- Host UX/workflows for adding servers (CLI commands, UI menus, settings paths)
+- Anthropic-specific concepts such as [Claude Desktop local MCP servers](https://docs.anthropic.com/en/docs/claude-desktop/mcp), [Claude Connectors via remote MCP](https://docs.anthropic.com/en/docs/agents-and-tools/remote-mcp-servers), and [Claude Code plugins](https://docs.anthropic.com/en/docs/claude-code/plugins) used in Cowork workflows
+
+## Security Notes
+
+- **Trust model:** Any prompt or agent allowed to call this MCP server can execute ANWB API actions on behalf of the user.
+- **No credentials required:** This server uses publicly accessible ANWB endpoints, so there are no secrets to protect. However, route queries may reveal location data.
+- **Team config governance:** Keep shared MCP config in version control and require review for changes to command/args/env/toolset filtering.
 
 </details>
 
