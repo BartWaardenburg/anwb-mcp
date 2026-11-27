@@ -13,6 +13,8 @@ Een [Model Context Protocol](https://modelcontextprotocol.io) (MCP) server voor 
 
 A community-built [Model Context Protocol](https://modelcontextprotocol.io) (MCP) server for ANWB traffic information, route planning, and location search in the Netherlands. Get real-time traffic incidents, calculate routes with turn-by-turn directions, and search for locations — all through natural language via any MCP-compatible AI client.
 
+The server supports MCP specification 2026-07-28. Clients that use the 2025 handshake also work.
+
 > **Note:** This is an unofficial, community-maintained project and is not affiliated with or endorsed by ANWB. This server uses publicly accessible ANWB API endpoints — no API key required.
 
 ## Snel starten
