@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.3.1](https://github.com/BartWaardenburg/anwb-mcp/compare/v0.3.0...v0.3.1) (2026-11-27)
+
+### Bug Fixes
+
+* copy pnpm-workspace.yaml into the Docker build and build the image in CI ([683ce18](https://github.com/BartWaardenburg/anwb-mcp/commit/683ce18bbf07d6dac5eaf04ed0494d1aca2aac4a))
+
 # [0.3.0](https://github.com/BartWaardenburg/anwb-mcp/compare/v0.2.0...v0.3.0) (2026-11-27)
 
 ### Bug Fixes
