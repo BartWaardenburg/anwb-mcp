@@ -1,5 +1,5 @@
 import { createRequire } from "node:module";
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { McpServer } from "@modelcontextprotocol/server";
 import type { AnwbClient } from "./anwb-client.js";
 import { registerLocationTools } from "./tools/locations.js";
 import { registerRouteTools } from "./tools/routes.js";
@@ -27,6 +27,14 @@ export const parseToolsets = (env?: string): Set<Toolset> => {
   return valid.size > 0 ? valid : new Set(ALL_TOOLSETS);
 };
 
+const INSTRUCTIONS = [
+  "Get Dutch traffic information, routes and locations from the public ANWB services.",
+  "To plan a route, call find_locations for the start and end, then calculate_route.",
+  "For an electric car, call list_ev_cars, then calculate_ev_route.",
+  "Call get_traffic_incidents for jams, roadworks and radar checks, or get_traffic_summary for totals.",
+  "No credentials are needed. The server caches results and retries failed requests.",
+].join("\n");
+
 type ToolRegisterer = (server: McpServer, client: AnwbClient) => void;
 
 const toolsetRegistry: Record<Toolset, ToolRegisterer[]> = {
@@ -39,15 +47,21 @@ export const createServer = (
   client: AnwbClient,
   toolsets?: Set<Toolset>,
 ): McpServer => {
-  const server = new McpServer({
-    name: "anwb-mcp",
-    version,
-  });
+  const server = new McpServer(
+    {
+      name: "anwb-mcp",
+      title: "ANWB",
+      version,
+      websiteUrl: "https://www.anwb.nl",
+    },
+    { instructions: INSTRUCTIONS },
+  );
 
   const enabled = toolsets ?? new Set(ALL_TOOLSETS);
   const registered = new Set<ToolRegisterer>();
 
-  for (const toolset of enabled) {
+  // Iterate the fixed list, not the user input, so tools/list has one stable order.
+  for (const toolset of ALL_TOOLSETS.filter((t) => enabled.has(t))) {
     const registerers = toolsetRegistry[toolset];
 
     for (const register of registerers) {

@@ -1,16 +1,45 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.BartWaardenburg/anwb-mcp",
+  "title": "ANWB Traffic and Routes",
   "description": "ANWB traffic information, route planning, and location search for the Netherlands",
-  "version": "0.1.0",
+  "repository": {
+    "url": "https://github.com/BartWaardenburg/anwb-mcp",
+    "source": "github"
+  },
+  "websiteUrl": "https://www.anwb.nl",
+  "version": "0.2.0",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "anwb-mcp",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "transport": {
         "type": "stdio"
-      }
+      },
+      "environmentVariables": [
+        {
+          "name": "ANWB_TOOLSETS",
+          "description": "Comma-separated toolsets to enable: locations, routes, incidents. Default: all.",
+          "isRequired": false,
+          "isSecret": false,
+          "format": "string"
+        },
+        {
+          "name": "ANWB_CACHE_TTL",
+          "description": "Cache lifetime in seconds for API responses.",
+          "isRequired": false,
+          "isSecret": false,
+          "format": "string"
+        },
+        {
+          "name": "ANWB_MAX_RETRIES",
+          "description": "Maximum retries for a failed request. Default: 3.",
+          "isRequired": false,
+          "isSecret": false,
+          "format": "string"
+        }
+      ]
     }
   ]
 }
